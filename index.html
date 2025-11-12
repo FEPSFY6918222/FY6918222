@@ -310,33 +310,41 @@ p.ex1 {
 <!-- Placeholder for total word count -->
 <p id="totalWordCount"></p>
 <hr>
+
+<!-- Example content sections (you can replace these with your actual text) -->
+<div id="Introduction_InText">This is the introduction section.</div>
+<div id="Valve Mechanics and Design Principles_InText">This section talks about valve design.</div>
+<div id="Materials Selection_InText">Here we discuss material choices.</div>
+<div id="Future Advancements_InText">Future advancements are described here.</div>
+<div id="Conclusion_InText">This is the conclusion section.</div>
+
 <script>
   // Function to calculate and display word count for a specified section
-  function displayWordCount(sectionId, outputId) {
-    // Get the text content from the specified section
-    const text = document.getElementById(sectionId).textContent;
-    // Split text into words based on spaces and filter out any empty strings
-    const wordArray = text.trim().split(/\s+/);
-    // Count the words
-    const wordCount = wordArray.length;
-    // Return the word count for summing purposes
-    return wordCount;
+  function displayWordCount(sectionId) {
+    const element = document.getElementById(sectionId);
+    if (!element) return 0; // Prevents errors if an element is missing
+    const text = element.textContent.trim();
+    if (text === "") return 0;
+    const wordArray = text.split(/\s+/);
+    return wordArray.length;
   }
+
   // Function to calculate and display total word count from selected sections
   function displayTotalWordCount() {
-    // Calculate word count for each section and accumulate the total
     const IntroductionCount = displayWordCount("Introduction_InText");
     const ValveMechanicsandDesignPrinciplesCount = displayWordCount("Valve Mechanics and Design Principles_InText");
     const MaterialsSelectionCount = displayWordCount("Materials Selection_InText");
     const FutureAdvancementsCount = displayWordCount("Future Advancements_InText");
     const ConclusionCount = displayWordCount("Conclusion_InText");
-    // Calculate the sum of all selected sections
-    const totalWordCount = IntroductionCount + ValveMechanicsandDesignPrinciplesCount + MaterialsSelectionCount + FutureAdvancementsCount + ConclusionCount;
-    // Display the total word count
-    document.getElementById("totalWordCount").innerText = `Total word count: ${totalWordCount}`;
+
+    const totalWordCount = IntroductionCount +ValveMechanicsandDesignPrinciplesCount + MaterialsSelectionCount +FutureAdvancementsCount +ConclusionCount;
+
+    document.getElementById("totalWordCount").innerText =
+      `Total word count: ${totalWordCount}`;
   }
-  // Run the function for specific sections and display total count when the page loads
+
+  // Run the function when the page loads
   window.onload = displayTotalWordCount;
-</hr>
 </script>
+
 </html>
