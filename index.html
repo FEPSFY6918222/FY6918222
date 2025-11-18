@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <style>
-    div {
-      background-color: white;
-      width: 300px;
-      border: 15px solid blue;
-      padding: 50px;
-      margin: 20px;
-    }
-    </style>
-  </head>
+ <style>
+#contentBox {
+  background-color: white;
+  width: 90%;
+  border: 8px solid blue;
+  padding: 40px;
+  margin: 20px auto;
+}
+</style>
+
   
   <head>
     <img src = "download.png" alt="Banner" width="300" height="50">
@@ -325,47 +324,52 @@ p.ex1 {
 <p id="totalWordCount"></p>
 <hr>
 <script>
-  function getSectionWordCount(sectionId) {
-      const heading = document.getElementById(sectionId);
-      if (!heading) return 0;
-  
-      // The paragraph immediately after the heading
-      const p = heading.nextElementSibling;
-      if (!p) return 0;
-  
-      const pre = p.querySelector("pre");
-      if (!pre) return 0;
-  
-      const text = pre.textContent.trim();
-  
-      // Split text into words properly
-      return text.split(/\s+/).filter(w => w.length > 0).length;
-  }
-  
-  function displayTotalWordCount() {
-      const sectionIds = [
-          "Abstract",
-          "Introduction",
-          "Valve Mechanics and Design Principles",
-          "Materials Selection",
-          "Future Advancements",
-          "Conclusion"
-      ];
-  
-      let total = 0;
-  
-      sectionIds.forEach(id => {
-          total += getSectionWordCount(id);
-      });
-  
-      document.getElementById("totalWordCount").innerHTML =
-          "<b>Total Word Count: " + total + "</b>";
-  }
-  
-  window.onload = function () {
-      displayTotalWordCount();
-  };
+function getNextRealElement(el) {
+    let s = el.nextSibling;
+    while (s && s.nodeType !== 1) {  
+        s = s.nextSibling;
+    }
+    return s;
+}
+
+function getSectionWordCount(sectionId) {
+    const h = document.getElementById(sectionId);
+    if (!h) return 0;
+
+    const p = getNextRealElement(h);
+    if (!p) return 0;
+
+    const pre = p.querySelector("pre");
+    if (!pre) return 0;
+
+    const text = pre.textContent.trim();
+
+    return text.split(/\s+/).filter(w => w.length > 0).length;
+}
+
+function displayTotalWordCount() {
+    const ids = [
+        "Abstract",
+        "Introduction",
+        "Valve Mechanics and Design Principles",
+        "Materials Selection",
+        "Future Advancements",
+        "Conclusion"
+    ];
+
+    let total = 0;
+
+    ids.forEach(id => { total += getSectionWordCount(id); });
+
+    document.getElementById("totalWordCount").innerHTML =
+        "<b>Total Word Count: " + total + "</b>";
+}
+
+window.onload = function () {
+    displayTotalWordCount();
+};
 </script>
+
 
 
 </html>
