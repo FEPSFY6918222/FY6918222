@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-
 <html>
- <style>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- CSS -->
+
+<style>
 #contentBox {
   background-color: white;
   width: 90%;
@@ -9,129 +14,104 @@
   padding: 40px;
   margin: 20px auto;
 }
-</style>
 
-  
-  <head>
-    <img src = "download.png" alt="Banner" width="300" height="50">
-      <h1><b>ENG0018 Computer Laboratory 2025/26</b><h1>
-      <h2>Student URN: 6918222</h2>
-  
-    <hr>
-    <h2 style="font-family:calibri;"><b>Conference paper: Artificial Heart Valves</b></h2>
-    <hr>
-        
-<!-- Last commit time display -->
-<div id="last-updated">Loading last update time...</div>
-<!-- Verify Button -->
-<button onclick="verifyLastUpdatedTime()" style="display: block; margin: 10px auto; padding: 8px 16px;">
-    Verify Last Modified Time
-</button>
-<script>
-    async function getLastUpdatedTime() {
-        const username = 'FEPSFY6918222';
-        const repo = 'FY6918222';
-       
-        const url = `https://api.github.com/repos/${username}/${repo}/commits`;
-        try {
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/vnd.github.v3+json',
-                }
-            });
-            if (!response.ok) {
-                throw new Error(`Error fetching data: ${response.status} - ${response.statusText}`);
-            }
-            const commits = await response.json();
-            if (commits && commits.length > 0) {
-                const lastCommitDate = new Date(commits[0].commit.committer.date);
-               
-                // Displaying the time on load
-                document.getElementById('last-updated').innerText = `Last Modified Time: ${lastCommitDate.toLocaleString()}`;
-            } else {
-                document.getElementById('last-updated').innerText = 'No commits found in the repository.';
-            }
-        } catch (error) {
-            console.error('Error fetching the last updated time:', error);
-            document.getElementById('last-updated').innerText = 'Error fetching update time. Please check the repository details.';
-        }
-    }
-    // Function to verify the last update time by re-fetching it from the API
-    async function verifyLastUpdatedTime() {
-        document.getElementById('last-updated').innerText = 'Verifying...';
-        await getLastUpdatedTime();
-        alert("Last modified time has been successfully verified from GitHub API.");
-    }
-    // Initial load to display the time on page load
-    window.onload = getLastUpdatedTime;
-</script>
-        
-    <!style for tables>
-      <style>
-        table {
-          font-family: arial, sans-serif;
-          border-collapse: collapse; width: 30%;
-          
-        }
-        
-        td, th{
-          border: 1px solid #dddddd;
-          text-align: left;
-          padding: 8px;
-        }
-    
-          tr:nth-child(even) {
-            background-color: #dddddd;
-          }
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 30%;
+}
 
-      </style>
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
 
-    <style>
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
 p.ex1 {
   margin-left: 250px;
 }
+
+.myslides {display:none;}
 </style>
-      
-        
+
 </head>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1">    
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <style>
-  .myslides {display:none;}
-  </style>
-  <body style="background-color:#FFFFFF;margin-left:50px;">
 
-    <!Table of Contents>
-    <table>
+<body style="background-color:#FFFFFF;margin-left:50px;">
 
-      <tr>
-        <th><h3>Table of Contents</h3></th>
-      </tr>
-      <tr>
-        <td><a href="#Abstract">Abstract</td>
-      </tr>
-      <tr>
-        <td><a href="#Introduction">Introduction</td>
-      </tr>
-      <tr>
-        <td><a href="#Valve Mechanics and Design Principles">Valve Mechanics and Design Principles</td>
-      </tr>
-      <tr>
-        <td><a href="#Materials Selection">Materials Selection</td>
-      </tr>
-      <tr>
-        <td><a href="#Future Advancements">Future Advancements</td>
-      </tr>
-      <tr>
-        <td><a href="#References">References</td>
-      </tr>
-    </table>
-    
-  <h3 id="Abstract">Abstract</h3>
-        <p class="ex1">
-          <pre>
+<img src="download.png" alt="Banner" width="300" height="50">
+
+<h1><b>ENG0018 Computer Laboratory 2025/26</b></h1> 
+<h2>Student URN: 6918222</h2>
+
+<hr>
+<h2 style="font-family:calibri;"><b>Conference paper: Artificial Heart Valves</b></h2>
+<hr>
+
+<!-- Last commit time display -->
+<div id="last-updated">Loading last update time...</div>
+
+<!-- Verify Button -->
+<button onclick="verifyLastUpdatedTime()"
+        style="display: block; margin: 10px auto; padding: 8px 16px;">
+    Verify Last Modified Time
+</button>
+
+<script>
+async function getLastUpdatedTime() {
+    const username = 'FEPSFY6918222';
+    const repo = 'FY6918222';
+
+    const url = `https://api.github.com/repos/${username}/${repo}/commits`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/vnd.github.v3+json' }
+        });
+
+        if (!response.ok) throw new Error(`Error fetching commits`);
+
+        const commits = await response.json();
+
+        if (commits.length > 0) {
+            const lastCommitDate = new Date(commits[0].commit.committer.date);
+            document.getElementById('last-updated').innerText =
+                `Last Modified Time: ${lastCommitDate.toLocaleString()}`;
+        } else {
+            document.getElementById('last-updated').innerText =
+                'No commits found in the repository.';
+        }
+
+    } catch (error) {
+        document.getElementById('last-updated').innerText =
+            'Error fetching update time. Please check the repository details.';
+    }
+}
+
+async function verifyLastUpdatedTime() {
+    document.getElementById('last-updated').innerText = 'Verifying...';
+    await getLastUpdatedTime();
+    alert("Last modified time has been successfully verified from GitHub API.");
+}
+</script>
+
+<!--Table of Contents links -->
+<table>
+  <tr><th><h3>Table of Contents</h3></th></tr>
+  <tr><td><a href="#Abstract">Abstract</a></td></tr>
+  <tr><td><a href="#Introduction">Introduction</a></td></tr>
+  <tr><td><a href="#Valve Mechanics and Design Principles">Valve Mechanics and Design Principles</a></td></tr>
+  <tr><td><a href="#Materials Selection">Materials Selection</a></td></tr>
+  <tr><td><a href="#Future Advancements">Future Advancements</a></td></tr>
+  <tr><td><a href="#References">References</a></td></tr>
+</table>
+
+<h3 id="Abstract">Abstract</h3>
+<p class="ex1"><pre>
             This article presents the crucial role of artificial heart valves in the restoration of cardiac
             function and the engineering considerations behind valve replacements. The focus being on
             design principles, valve mechanics and material selection. Mechanical valves, particularly
@@ -141,194 +121,157 @@ p.ex1 {
             degeneration and stenosis. Comparing the performance, advantages and disadvantages of
             each type of valve type. This also explores the ongoing engineering challenges with improving
             the physiological performance of artificial heart valves.
-          </pre>
-        </p>
-  <h3 id="Introduction">Introduction</h3>
-    <p class="ex1">
-      <pre>
+</pre></p>
+
+<h3 id="Introduction">Introduction</h3>
+<p class="ex1"><pre>
             Artificial heart valves over the many years in which they have been developed have caused
-        many patients who have undergone surgery to have their heart valves replaced to have a great
-        increase in quality of life as well as a longer lifespan. In 2020 alone, the total number of heart
-        valve surgeries performed reached an approximate 25,000 patients, a third less than during the
-        same period of time in 2019, enough people to fill the O2 arena. The new valves in a patient’s
-        heart should last a lifetime due to the design at which they are manufactured, made from
-        materials such as pyrolytic carbon, titanium and other metals or other tissues to ensure
-        minimal mechanical fatigue and maximum longevity in which this article will cover. 
-      </pre>
-  </p>
+            many patients who have undergone surgery to have their heart valves replaced to have a great
+            increase in quality of life as well as a longer lifespan. In 2020 alone, the total number of heart
+            valve surgeries performed reached an approximate 25,000 patients, a third less than during the
+            same period of time in 2019, enough people to fill the O2 arena. The new valves in a patient’s
+            heart should last a lifetime due to the design at which they are manufactured, made from
+            materials such as pyrolytic carbon, titanium and other metals or other tissues to ensure
+            minimal mechanical fatigue and maximum longevity in which this article will cover.
+</pre></p>
 
-  <h3 id="Valve Mechanics and Design Principles">Valve Mechanics and Design Principles</h3>
-    <p class="ex1">
-      <pre>
-        Heart valves are designed to allow blood flow whilst preventing back flow under different
-        pressure conditions. When chambers contract the pressure increases inside them and
-        therefore force the valve open where blood is then pumped into the rest of the heart or body,
-        when the chambers relax it causes a negative pressure difference and so shuts the heart valve.
-        The Mechanical design of an artificial valve is therefore critical to achieving the same efficient
-        hemodynamics and long-term reliability. 
-        
-        There are 2 types of artificial heart valves: Mechanical and Tissue. Mechanical valves where the
-        main advantage is due to their durability as “these valves rarely require replacement and often
-        last for the remainder of a patient’s life” (Frankel and Nguyen,2021) with the disadvantage that
-        the patient will have to be prescribed life-long anticoagulation medication (blood thinners) due
-        to the possibility of blood clotting and blocking the leaflets from opening. There are many valves
-        such as bileaflet and trileaflet designs that are used in practice where, bileaflet tends to be
-        used more commonly whereas trileaflet designs are less commonly used and mimic the natural 
-        mechanics of a valve. The bileaflet design creates areas with more uniform central flow and has
-        much better hemodynamics as compared to previous evolutions of heart valves such as ball-and-cage. 
-        
-        “The first of these valves, a St. Jude Medical cardiac valve prosthesis, showed favourable results
-        for AVR, mitral valve replacement (MVR), and double valve replacement (DVR) with “no cases of 
-        mechanical failure”. With these advantages, a rigid bileaflet valve is the most common
-        mechanical valve design used today.” (Principles of Heart Valve Engineering, 2019)
-      </pre>
+<h3 id="Valve Mechanics and Design Principles">Valve Mechanics and Design Principles</h3>
+<p class="ex1"><pre>
+            Heart valves are designed to allow blood flow whilst preventing back flow under different
+            pressure conditions. When chambers contract the pressure increases inside them and
+            therefore force the valve open where blood is then pumped into the rest of the heart or body,
+            when the chambers relax it causes a negative pressure difference and so shuts the heart valve.
+            The Mechanical design of an artificial valve is therefore critical to achieving the same efficient
+            hemodynamics and long-term reliability. 
+            
+            There are 2 types of artificial heart valves: Mechanical and Tissue. Mechanical valves where the
+            main advantage is due to their durability as “these valves rarely require replacement and often
+            last for the remainder of a patient’s life” (Frankel and Nguyen,2021) with the disadvantage that
+            the patient will have to be prescribed life-long anticoagulation medication (blood thinners) due
+            to the possibility of blood clotting and blocking the leaflets from opening. There are many valves
+            such as bileaflet and trileaflet designs that are used in practice where, bileaflet tends to be
+            used more commonly whereas trileaflet designs are less commonly used and mimic the natural 
+            mechanics of a valve. The bileaflet design creates areas with more uniform central flow and has
+            much better hemodynamics as compared to previous evolutions of heart valves such as ball-and-cage. 
+            
+            “The first of these valves, a St. Jude Medical cardiac valve prosthesis, showed favourable results
+            for AVR, mitral valve replacement (MVR), and double valve replacement (DVR) with “no cases of 
+            mechanical failure”. With these advantages, a rigid bileaflet valve is the most common
+            mechanical valve design used today.” (Principles of Heart Valve Engineering, 2019)
+</pre></p>
 
-  <h3 id="Materials Selection">Materials Selection</h3>
-    <p class="ex1">
-      <pre>
-        However, no matter the design, the material at which the valve is made from is a main factor
-        and consideration to think about as it must be made from a stiff material to resist deformation.
-        One of the most common materials used for mechanical heart valves is pyrolytic carbon where
-        according to a review article of the Mechanical considerations for polymeric heart valve
-        development:
-        
-        “Pyrolytic carbon is strong and quite resistant to abrasion and fatigue. Wear testing of St. Judes
-        Medical mechanical valves has predicted that the pyrolytic carbon coating on the valves could
-        last well over 200 years. Clinically, bileaflet mechanical valves have demonstrated durability
-        beyond 20 years, with low rates of valve- related mortality” (Li et al., 2019).
+<h3 id="Materials Selection">Materials Selection</h3>
+<p class="ex1"><pre>
+            However, no matter the design, the material at which the valve is made from is a main factor
+            and consideration to think about as it must be made from a stiff material to resist deformation.
+            One of the most common materials used for mechanical heart valves is pyrolytic carbon where
+            according to a review article of the Mechanical considerations for polymeric heart valve
+            development:
+            
+            “Pyrolytic carbon is strong and quite resistant to abrasion and fatigue. Wear testing of St. Judes
+            Medical mechanical valves has predicted that the pyrolytic carbon coating on the valves could
+            last well over 200 years. Clinically, bileaflet mechanical valves have demonstrated durability
+            beyond 20 years, with low rates of valve- related mortality” (Li et al., 2019).
+    
+            Historically, these mechanical valves have been the favoured of the two types for younger
+            patients due to their longevity, however for older aged patients “the American College of
+            Cardiology and the American Heart Association recommend mechanical valves for people
+            under age 50 and biologic (tissue) valves for those over 70.” (Harvard Health Publishing, 2018).
+            This is due to the tissue valve’s longevity being much less than mechanical valves. 
+            
+            Tissue valves/Bioprosthetic valves (BHVs) are “constructed from porcine valve or bovine
+            pericardial tissue. The geometry and mechanical properties of animal valves are similar to 
+            those of humans.” (Li et al., 2019).  
+    
+            Bioprosthetic valves have a shorter lifespan due to “structural valve degeneration (SVD)” (Li et al., 2019).
+            This develops in multiple stages, from stage 1-3. A valve is classed as stage 1 when
+            there is “morphological leaflet abnormality [without] hemodynamic change.” (Patel et al., 2023)
+            where, if not attended to can lead to stage 3 of SVD, his is classed as severe SVD: 
+            
+            “SVD Stage 3 - severe stenosis and/or regurgitation
+          	    • Mean gradient ≥40 mmHg
+                • Mean gradient ≥20 mmHg increase from baseline concomitant with dec. in EOA and
+                  DVI
+                • Severe AR (>2+, 4+) new or worsened” (Patel et al., 2023)
+            
+            Stenosis, in this context, is the abnormal narrowing of the heart canals which restricts the flow
+            of blood as there is a resistance to flow which causes a pressure difference between the
+            chamber before the valve and the chamber after it.
 
-        Historically, these mechanical valves have been the favoured of the two types for younger
-        patients due to their longevity, however for older aged patients “the American College of
-        Cardiology and the American Heart Association recommend mechanical valves for people
-        under age 50 and biologic (tissue) valves for those over 70.” (Harvard Health Publishing, 2018).
-        This is due to the tissue valve’s longevity being much less than mechanical valves. 
-        
-        Tissue valves/Bioprosthetic valves (BHVs) are “constructed from porcine valve or bovine
-        pericardial tissue. The geometry and mechanical properties of animal valves are similar to 
-        those of humans.” (Li et al., 2019).  
+<!-- Table -->
+<a href="https://doi.org/10.1016/j.jbiomech.2013.09.023">Hasan et al., (2014).</a>
 
-        Bioprosthetic valves have a shorter lifespan due to “structural valve degeneration (SVD)” (Li et al., 2019).
-        This develops in multiple stages, from stage 1-3. A valve is classed as stage 1 when
-        there is “morphological leaflet abnormality [without] hemodynamic change.” (Patel et al., 2023)
-        where, if not attended to can lead to stage 3 of SVD, his is classed as severe SVD: 
-        
-        “SVD Stage 3 - severe stenosis and/or regurgitation
-      	    • Mean gradient ≥40 mmHg
-            • Mean gradient ≥20 mmHg increase from baseline concomitant with dec. in EOA and
-              DVI
-            • Severe AR (>2+, 4+) new or worsened” (Patel et al., 2023)
-        
-        Stenosis, in this context, is the abnormal narrowing of the heart canals which restricts the flow
-        of blood as there is a resistance to flow which causes a pressure difference between the
-        chamber before the valve and the chamber after it.
+<table style="width:75%">
+<tr><th></th><th colspan="2">Transvalvular Pressure (mmHg)</th></tr>
+<tr><th></th><th>Human</th><th>Bovine</th></tr>
+<tr><th>Mitral valve</th><td>120.0</td><td>144.0</td></tr>
+<tr><th>Aortic valve</th><td>80.0</td><td>92.4</td></tr>
+<tr><th>Tricuspid valve</th><td>25.0</td><td>27.2</td></tr>
+<tr><th>Pulmonary valve</th><td>10.0</td><td>11.9</td></tr>
+</table>
+           Stenosis, in this context, is the abnormal narrowing of the heart canals which restricts the flow
+           of blood as there is a resistance to flow which causes a pressure difference between the
+           chamber before the valve and the chamber after it.
+</pre></p>
 
-             <a href=”https://doi.org/10.1016/j.jbiomech.2013.09.023.">Hasan et al., (2014).</a>Table 1:Transvalvular pressures for human and bovine heart valves. with permission from American physiological society 
-              <table style="width:75%">
-                <tr>
-                  <th> </th>
-                  <th colspan="2">Transvalvular Pressure (mmHg)</th>
-                </tr>
-                <tr>
-                  <th> </th>
-                  <th>Human</th>
-                  <th>Bovine</th>
-                </tr>
-                <tr>
-                  <th>Mitral valve</th>
-                  <td>120.0</td>
-                  <td>144.0</td>
-                </tr>
-                <tr>
-                  <th>Aortic valve</th>
-                  <td>80.0</td>
-                  <td>92.4</td>
-                </tr>
-                <tr>
-                  <th>Tricuspid valve</th>
-                  <td>25.0</td>
-                  <td>27.2</td>
-                </tr>
-                <tr>
-                  <th>Pulmonary valve</th>
-                  <td>10.0</td>
-                  <td>11.9</td>
-                </tr>
-              </table>
-        Stenosis, in this context, is the abnormal narrowing of the heart canals which restricts the flow
-        of blood as there is a resistance to flow which causes a pressure difference between the
-        chamber before the valve and the chamber after it.
-    </pre>
+<h3 id="Future Advancements">Future Advancements</h3>
+<p><pre>
+           Currently valve replacement is the only solution to treat patients suffering from valvular heart
+           disease, however the future of heart valves is heading to use tissue-engineering to try and find a
+           solution for the surgical procedure using minimally invasive techniques. There has been much
+           research where: “Situ heart valve tissue engineering based on cell-free functionalized starter
+           materials is considered to be a promising approach for clinical translation” (Fioretta et al., 2018) 
+</pre></p>
 
-    <h3 id="Future Advancements">Future Advancements</h3>
-    <p>
-      <pre>
-        Currently valve replacement is the only solution to treat patients suffering from valvular heart
-        disease, however the future of heart valves is heading to use tissue-engineering to try and find a
-        solution for the surgical procedure using minimally invasive techniques. There has been much
-        research where: “Situ heart valve tissue engineering based on cell-free functionalized starter
-        materials is considered to be a promising approach for clinical translation” (Fioretta et al., 2018) 
-      </pre>
-    </p>
+<h3 id="Conclusion">Conclusion</h3>
+<p><pre>
+           Artificial heart valves have become a major advancement in biomechanical engineering by 
+           many trials and improvement of combing precise mechanical design with durable materials to 
+           try mimic the natural flow of blood and valve functions. Both tissue and mechanical valves both 
+           have their pros and cons; mechanical valves require the patient to permanently have to take 
+           anticoagulation medication for the rest of their life with the upside that their life and quality of 
+           life is greatly increased whilst tissue has a shorter longevity however allows the patient to go 
+           back to normality. Hopefully future of heart valves is able to combine the best of both allowing 
+           patients to have the durability of a mechanical valve and the performance and hemodynamics 
+           of a tissue valve.
+</pre></p>
 
-    <h3 id="Conclusion">Conclusion</h3>
-    <p>
-      <pre>
-        Artificial heart valves have become a major advancement in biomechanical engineering by 
-        many trials and improvement of combing precise mechanical design with durable materials to 
-        try mimic the natural flow of blood and valve functions. Both tissue and mechanical valves both 
-        have their pros and cons; mechanical valves require the patient to permanently have to take 
-        anticoagulation medication for the rest of their life with the upside that their life and quality of 
-        life is greatly increased whilst tissue has a shorter longevity however allows the patient to go 
-        back to normality. Hopefully future of heart valves is able to combine the best of both allowing 
-        patients to have the durability of a mechanical valve and the performance and hemodynamics 
-        of a tissue valve.
-      </pre>
-    </p>
-    <!--MathML representations of the quadratic formula-->
-    <!--Formatting some equations using MathML <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>4</mi><mo>&InvisibleTimes;</mo><mi>x</mi><mo>+</mo><mi>4</mi><mo>=</mo><mi>0</mi>-->
-      <h3 id="References">References</h3>
-    <p>
-      <pre>
-        Arash Kheradvar (2019) Principles of heart valve engineering. Elsevier/Academic Press.
-        
-        Fioretta, E.S. et al. (2018) ‘The future of heart valve replacement: recent developments and 
-        translational challenges for heart valve tissue engineering’, Journal of Tissue Engineering and 
-        Regenerative Medicine, 12(1), pp. e323–e335. Available at: https://doi.org/10.1002/term.2326.
-        
-        Frankel, W.C. and Nguyen, T.C. (2021) ‘Artificial Heart Valves’, JAMA, 325(24), pp. 2512–2513. 
-        Available at: https://doi.org/10.1001/jama.2020.19936.
-        
-        Harvard Health Publishing (2018) Valve replacement: Mechanical or tissue? - Harvard 
-        Health, Harvard Health. Harvard Health. Available at: https://www.health.harvard.edu/heart-
-        health/valve-replacement-mechanical-or-tissue.
-        
-        Hasan, A. et al. (2014) ‘Biomechanical properties of native and tissue engineered heart valve 
-        constructs’, Journal of Biomechanics, 47(9), pp. 1949–1963. Available at: 
-        https://doi.org/10.1016/j.jbiomech.2013.09.023.
-        
-        Li, R.L. et al. (2019) ‘Mechanical considerations for polymeric heart valve development: 
-        Biomechanics, materials, design and manufacturing’, Biomaterials, 225, p. 119493. Available
-        at: https://doi.org/10.1016/j.biomaterials.2019.119493.
-        
-        Patel, S.P. et al. (2023) ‘Structural Valve Deterioration in Transcatheter Aortic Bioprostheses: 
-        Diagnosis, Pathogenesis, and Treatment’, Structural Heart, 7(3), p. 100155. Available at: 
-        https://doi.org/10.1016/j.shj.2022.100155.
+<h3 id="References">References</h3>
+<p><pre>
+           Arash Kheradvar (2019) Principles of heart valve engineering. Elsevier/Academic Press.
+           
+           Fioretta, E.S. et al. (2018) ‘The future of heart valve replacement: recent developments and 
+           translational challenges for heart valve tissue engineering’, Journal of Tissue Engineering and 
+           Regenerative Medicine, 12(1), pp. e323–e335. Available at: https://doi.org/10.1002/term.2326.
+           
+           Frankel, W.C. and Nguyen, T.C. (2021) ‘Artificial Heart Valves’, JAMA, 325(24), pp. 2512–2513. 
+           Available at: https://doi.org/10.1001/jama.2020.19936.
+           
+           Harvard Health Publishing (2018) Valve replacement: Mechanical or tissue? - Harvard 
+           Health, Harvard Health. Harvard Health. Available at: https://www.health.harvard.edu/heart-
+           health/valve-replacement-mechanical-or-tissue.
+           
+           Hasan, A. et al. (2014) ‘Biomechanical properties of native and tissue engineered heart valve 
+           constructs’, Journal of Biomechanics, 47(9), pp. 1949–1963. Available at: 
+           https://doi.org/10.1016/j.jbiomech.2013.09.023.
+           
+           Li, R.L. et al. (2019) ‘Mechanical considerations for polymeric heart valve development: 
+           Biomechanics, materials, design and manufacturing’, Biomaterials, 225, p. 119493. Available
+           at: https://doi.org/10.1016/j.biomaterials.2019.119493.
+           
+           Patel, S.P. et al. (2023) ‘Structural Valve Deterioration in Transcatheter Aortic Bioprostheses: 
+           Diagnosis, Pathogenesis, and Treatment’, Structural Heart, 7(3), p. 100155. Available at: 
+           https://doi.org/10.1016/j.shj.2022.100155.
+</pre></p>
 
-      </pre>
-    </p>
-
-<!-- //////////////////////////////////////////////////////////////////////////////// -->
-  <!-- ////////////////////////////// Word count function ////////////////////////////// -->
-  <!-- //////////////////////////////////////////////////////////////////////////////// -->
-<!-- Placeholder for total word count -->
+<!-- Word Count -->
 <p id="totalWordCount"></p>
 <hr>
+
 <script>
 function getNextRealElement(el) {
     let s = el.nextSibling;
-    while (s && s.nodeType !== 1) {  
-        s = s.nextSibling;
-    }
+    while (s && s.nodeType !== 1) { s = s.nextSibling; }
     return s;
 }
 
@@ -343,7 +286,6 @@ function getSectionWordCount(sectionId) {
     if (!pre) return 0;
 
     const text = pre.textContent.trim();
-
     return text.split(/\s+/).filter(w => w.length > 0).length;
 }
 
@@ -358,17 +300,22 @@ function displayTotalWordCount() {
     ];
 
     let total = 0;
-
-    ids.forEach(id => { total += getSectionWordCount(id); });
+    ids.forEach(id => total += getSectionWordCount(id));
 
     document.getElementById("totalWordCount").innerHTML =
         "<b>Total Word Count: " + total + "</b>";
 }
 
-window.onload = function () {
+// Onload handler
+window.onload = function() {
+    getLastUpdatedTime();
     displayTotalWordCount();
 };
 </script>
+
+</body>
+</html>
+
 
 
 
