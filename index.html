@@ -314,23 +314,26 @@ p.ex1 {
 <p id="totalWordCount"></p>
 <hr>
 <script>
-  function countWordsInElement(id) {
-      const el = document.getElementById(id);
-      if (!el) return 0;
+<script>
+  function getSectionWordCount(sectionId) {
+      const heading = document.getElementById(sectionId);
+      if (!heading) return 0;
   
-      // Get all <pre> tags inside that section
-      const pres = el.parentElement.querySelectorAll("pre");
+      // The paragraph immediately after the heading
+      const p = heading.nextElementSibling;
+      if (!p) return 0;
   
-      let text = "";
-      pres.forEach(p => text += " " + p.textContent);
+      const pre = p.querySelector("pre");
+      if (!pre) return 0;
   
-      // Clean and split words
-      return text.trim().split(/\s+/).filter(w => w.length > 0).length;
+      const text = pre.textContent.trim();
+  
+      // Split text into words properly
+      return text.split(/\s+/).filter(w => w.length > 0).length;
   }
   
   function displayTotalWordCount() {
-      // Count words from each major section
-      const sections = [
+      const sectionIds = [
           "Abstract",
           "Introduction",
           "Valve Mechanics and Design Principles",
@@ -340,16 +343,17 @@ p.ex1 {
       ];
   
       let total = 0;
-      sections.forEach(id => total += countWordsInElement(id));
   
-      // Display result
+      sectionIds.forEach(id => {
+          total += getSectionWordCount(id);
+      });
+  
       document.getElementById("totalWordCount").innerHTML =
           "<b>Total Word Count: " + total + "</b>";
   }
   
-  // Run when page loads
   window.onload = function () {
-      getLastUpdatedTime();  // your GitHub function
+      getLastUpdatedTime();  // your GitHub timestamp
       displayTotalWordCount();
   };
 </script>
