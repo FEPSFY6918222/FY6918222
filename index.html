@@ -16,8 +16,10 @@
   background-color: #513C7F;
 }
 
-#headertext{
-  top: 85px;
+#timestamp{
+  position: abdsolute;
+  top: 0;
+  right: 0;
 }
 
 #bannerlogo {
@@ -88,45 +90,46 @@ p.ex1 {
     Verify Last Modified Time
 </button>
 
-<script>
-async function getLastUpdatedTime() {
-    const username = 'FEPSFY6918222';
-    const repo = 'FY6918222';
-
-    const url = `https://api.github.com/repos/${username}/${repo}/commits`;
-
-    try {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: { 'Accept': 'application/vnd.github.v3+json' }
-        });
-
-        if (!response.ok) throw new Error(`Error fetching commits`);
-
-        const commits = await response.json();
-
-        if (commits.length > 0) {
-            const lastCommitDate = new Date(commits[0].commit.committer.date);
-            document.getElementById('last-updated').innerText =
-                `Last Modified Time: ${lastCommitDate.toLocaleString()}`;
-        } else {
-            document.getElementById('last-updated').innerText =
-                'No commits found in the repository.';
-        }
-
-    } catch (error) {
-        document.getElementById('last-updated').innerText =
-            'Error fetching update time. Please check the repository details.';
-    }
-}
-
-async function verifyLastUpdatedTime() {
-    document.getElementById('last-updated').innerText = 'Verifying...';
-    await getLastUpdatedTime();
-    alert("Last modified time has been successfully verified from GitHub API.");
-}
-</script>
-
+<div id="timestamp">
+  <script>
+  async function getLastUpdatedTime() {
+      const username = 'FEPSFY6918222';
+      const repo = 'FY6918222';
+  
+      const url = `https://api.github.com/repos/${username}/${repo}/commits`;
+  
+      try {
+          const response = await fetch(url, {
+              method: 'GET',
+              headers: { 'Accept': 'application/vnd.github.v3+json' }
+          });
+  
+          if (!response.ok) throw new Error(`Error fetching commits`);
+  
+          const commits = await response.json();
+  
+          if (commits.length > 0) {
+              const lastCommitDate = new Date(commits[0].commit.committer.date);
+              document.getElementById('last-updated').innerText =
+                  `Last Modified Time: ${lastCommitDate.toLocaleString()}`;
+          } else {
+              document.getElementById('last-updated').innerText =
+                  'No commits found in the repository.';
+          }
+  
+      } catch (error) {
+          document.getElementById('last-updated').innerText =
+              'Error fetching update time. Please check the repository details.';
+      }
+  }
+  
+  async function verifyLastUpdatedTime() {
+      document.getElementById('last-updated').innerText = 'Verifying...';
+      await getLastUpdatedTime();
+      alert("Last modified time has been successfully verified from GitHub API.");
+  }
+  </script>
+</div>
 <!--Table of Contents links -->
 <table>
   <tr><th><h3>Table of Contents</h3></th></tr>
