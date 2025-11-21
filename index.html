@@ -7,53 +7,79 @@
 <!-- CSS -->
 
 <style>
-#bluebanner{ 
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:80px;
-  background-color: #503c83;
+body {
+  background-color: #FCFAFF;
+  margin: 40px auto;
+  padding: 20px 40px;
+  width: 85%;
+  max-width: 1100px;
+  border: 3px solid #503c83;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  font-family: Calibri, Arial, sans-serif;
 }
 
-#timestamp{
-  position: abdsolute;
-  top: 0;
-  right: 0;
-}
-
-#bannerlogo {
-  height: 60px;     
+#bluebanner {
   position: fixed;
-  top: -32px;
-
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  background-color: #503c83;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+  z-index: 999;
 }
 
-#bannertext {
-  height: 80px;
-  position: absolute;
-  right: 100%;
+#bannertext h1, #bannertext h2 {
+  margin: 0;
+  padding: 0;
+  color: white;
+}
 
+#bannerlogo img {
+  height: 80px;
+  width: auto;
+}
+
+#timestamp {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: white;
+  font-size: 14px;
 }
 
 table {
-  font-family: arial, sans-serif;
+  font-family: Calibri, sans-serif;
   border-collapse: collapse;
-  width: 30%;
+  width: 40%;
+  margin-top: 20px;
 }
 
 td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
+  border: 1px solid #bbb;
+  padding: 8px 12px;
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: #eee;
 }
 
-p.ex1 {
-  margin-left: 250px;
+/* Content paragraphs */
+p.ex1 pre {
+  margin-left: 40px;
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* Fix spacing after banner */
+#headertext {
+  margin-top: 130px;
 }
 
 .myslides {display:none;}
@@ -64,18 +90,18 @@ p.ex1 {
 <body style="background-color:#FCFAFF;margin-left:50px;">
   <div id="bluebanner">
     <div id="bannertext">
-      <h1><b>ENG0018 Computer Laboratory 2025/26</b></h1> 
+      <h1><b>ENG0018 Computer Laboratory 2025/26</b></h1>
       <h2>Student URN: 6918222</h2>
     </div>
+
+    <div id="timestamp">
+      <span id="last-updated" style="color:white;">Loading…</span>
+    </div>
+
     <div id="bannerlogo">
-      <img src="University of Surrey Logo.png" alt="Banner" width="250" height="140">
+      <img src="University of Surrey Logo.png" alt="Banner Logo">
     </div>
   </div>
-  
-<div id="headertext">
-  <h1><b>ENG0018 Computer Laboratory 2025/26</b></h1> 
-  <h2>Student URN: 6918222</h2>
-</div>
   
 <hr>
 <h2 style="font-family:calibri;"><b>Conference paper: Artificial Heart Valves</b></h2>
