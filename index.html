@@ -313,39 +313,33 @@ Table 1:Transvalvular pressures for human and bovine heart valves. with permissi
 
 <!-- Word Count -->
 <p id="totalWordCount"></p>
-<script>
-  function getLastUpdatedTime() {
-    const date = new Date(document.lastModified);
-    document.getElementById("last-updated").textContent = date.toLocaleString();
-  }
-
-  function calculateWordCount() {
-    const sectionIds = ["Abstract", "Introduction", "Valve Mechanics and Design Principles","Materials Selection", "Future Advancements", "Conclusion"];
-
-    let total = 0;
-
-    sectionIds.forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const next = el.nextElementSibling;
-      if (!next) return;
-
-      const pre = next.querySelector("pre");
-      if (!pre) return;
-
-      const text = pre.textContent.trim();
-      const words = text.split(/\s+/).filter(w => w.length > 0).length;
-      total += words;
-    });
-
-    document.getElementById("totalWordCount").innerHTML = `<b>Total Word Count: ${total}</b>`;
-  }
-
-  window.onload = function() {
-    getLastUpdatedTime();
-    calculateWordCount();
-  };
-</script>
+  <script>
+    function getLastUpdatedTime() {
+      const date = new Date(document.lastModified);
+      document.getElementById("last-updated").textContent = date.toLocaleString();
+    }
+    
+    function calculateWordCount() {
+      const sectionIds = ["Abstract", "Introduction", "Valve Mechanics and Design Principles","Materials Selection", "Future Advancements", "Conclusion"];
+      
+      let total = 0;
+      sectionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const next = el.nextElementSibling;'
+          if (!next) return;
+        const pre = next.querySelector("pre");
+        if (!pre) return;
+        const text = pre.textContent.trim();
+        const words = text.split(/\s+/).filter(w => w.length > 0).length;
+        total += words;
+      });
+      document.getElementById("totalWordCount").innerHTML = `<b>Total Word Count: ${total}</b>`;
+    }
+    window.onload = function() {
+      getLastUpdatedTime();
+      calculateWordCount();
+    };
+  </script>
 </body>
 </html>
